@@ -1,35 +1,33 @@
 # テーブル設計
 
 ## usersテーブル
-|Column          |Type  |Options                  |
-|----------------|------|-------------------------|
-|nickname        |string|null: false              |
-|family_name     |string|null: false              |
-|first_name      |string|null: false              |
-|family_name_kana|string|null: false              |
-|first_name_kana |string|null: false              |
-|birth_year      |string|null: false              |
-|birth_month     |string|null: false              |
-|birth_day       |string|null: false              |
-|password        |string|null: false              |
-|email           |string|null: false, unique: true|
+|Column            |Type  |Options                  |
+|------------------|------|-------------------------|
+|nickname          |string|null: false              |
+|family_name       |string|null: false              |
+|first_name        |string|null: false              |
+|family_name_kana  |string|null: false              |
+|first_name_kana   |string|null: false              |
+|birth             |date  |null: false              |
+|encrypted_password|string|null: false              |
+|email             |string|null: false, unique: true|
 
 ### Association
 - has_many :items
 - has_many :orders
 
 ## itemsテーブル
-|Column        |Type      |Options                       |
-|--------------|----------|------------------------------|
-|item_name     |string    |null: false                   |
-|info          |text      |null: false                   |
-|price         |integer   |null: false                   |
-|category      |integer   |null: false                   |
-|condition     |integer   |null: false                   |
-|fee_allocation|integer   |null: false                   |
-|delivery_from |integer   |null: false                   |
-|delivery_days |integer   |null: false                   |
-|user_id       |references|null: false, foreign_key: true|
+|Column           |Type      |Options                       |
+|-----------------|----------|------------------------------|
+|name             |string    |null: false                   |
+|info             |text      |null: false                   |
+|price            |integer   |null: false                   |
+|category_id      |integer   |null: false                   |
+|condition_id     |integer   |null: false                   |
+|fee_allocation_id|integer   |null: false                   |
+|prefecture_id    |integer   |null: false                   |
+|delivery_days_id |integer   |null: false                   |
+|user             |references|null: false, foreign_key: true|
 
 ### Association
 - belongs_to :user
@@ -38,8 +36,8 @@
 ## ordersテーブル
 |Column |Type      |Options                       |
 |-------|----------|------------------------------|
-|user_id|references|null: false, foreign_key: true|
-|item_id|references|null: false, foreign_key: true|
+|user   |references|null: false, foreign_key: true|
+|item   |references|null: false, foreign_key: true|
 
 ### Association
 - belongs_to :user
@@ -49,13 +47,13 @@
 ## deliveriesテーブル
 |Column       |Type      |Options                       |
 |-------------|----------|------------------------------|
-|zip_code     |integer   |null: false                   |
-|prefecture   |string    |null: false                   |
+|zip_code     |string    |null: false                   |
+|prefecture_id|integer   |null: false                   |
 |city         |string    |null: false                   |
 |house_number |string    |null: false                   |
 |building_name|string    |                              |
 |phone_number |string    |null: false                   |
-|order_id     |references|null: false, foreign_key: true|
+|order        |references|null: false, foreign_key: true|
 
 ### Association
 - belongs_to :order
