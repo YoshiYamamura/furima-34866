@@ -10,10 +10,14 @@ class User < ApplicationRecord
 
   with_options presence: true do
     validates :nickname
-    validates :family_name, format: { with: full_width_japanese }
-    validates :first_name, format: { with: full_width_japanese }
-    validates :family_name_kana, format: { with: full_width_katakana }
-    validates :first_name_kana, format: { with: full_width_katakana }
+    with_options format: { with: full_width_japanese } do
+      validates :family_name
+      validates :first_name
+    end
+    with_options format: { with: full_width_katakana } do
+      validates :family_name_kana
+      validates :first_name_kana
+    end
     validates :birth
     validates :password, format: { with: alphabet_number_mix }
   end
