@@ -3,8 +3,8 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  
-  alphabet_number_mix = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i
+
+  alphabet_number_mix = /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i
   full_width_japanese = /\A[ぁ-んァ-ヶ一-龥々]+\z/
   full_width_katakana = /\A[ァ-ヶ]+\z/
 
