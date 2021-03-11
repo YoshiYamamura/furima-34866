@@ -7,7 +7,7 @@ RSpec.describe Item, type: :model do
 
   describe '商品出品機能' do
     context '正常系' do
-      it 'name, info, price, category_id, condition_id, fee_allocation_id, prefecture_id, delivery_days_id, imageが存在すれば登録できる' do
+      it 'name, info, price, category_id, condition_id, fee_allocation_id, prefecture_id, delivery_period_id, imageが存在すれば登録できる' do
         expect(@item).to be_valid
       end
     end
@@ -67,10 +67,10 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include('Prefecture must be other than 1')
       end
-      it 'delivery_days_idが1(未選択)では出品できない' do
-        @item.delivery_days_id = 1
+      it 'delivery_period_idが1(未選択)では出品できない' do
+        @item.delivery_period_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include('Delivery days must be other than 1')
+        expect(@item.errors.full_messages).to include('Delivery period must be other than 1')
       end
       it 'imageが空では出品できない' do
         @item.image = nil

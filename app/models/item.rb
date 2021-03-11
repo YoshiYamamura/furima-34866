@@ -7,7 +7,7 @@ class Item < ApplicationRecord
   belongs_to :condition
   belongs_to :fee_allocation
   belongs_to :prefecture
-  belongs_to :delivery_days
+  belongs_to :delivery_period
 
   with_options presence: true do
     validates :image
@@ -19,7 +19,7 @@ class Item < ApplicationRecord
       validates :condition_id
       validates :fee_allocation_id
       validates :prefecture_id
-      validates :delivery_days_id
+      validates :delivery_period_id
     end
   end
 end
