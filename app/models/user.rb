@@ -21,4 +21,6 @@ class User < ApplicationRecord
     validates :birth
     validates :password, format: { with: alphabet_number_mix }
   end
+
+  has_many :items
 end
