@@ -1,4 +1,4 @@
-class Fee_allocation < ActiveHash::Base
+class FeeAllocation < ActiveHash::Base
   self.data = [
     { id: 1, name: '--' },
     { id: 2, name: '着払い(購入者負担)' },
