@@ -70,8 +70,13 @@ RSpec.describe OrderDelivery, type: :model do
         @order_delivery.valid?
         expect(@order_delivery.errors.full_messages).to include('Phone number is not a number')
       end
-      it 'phone_numberが半角数字以外では購入できない' do
+      it 'phone_numberが全角数字では購入できない' do
         @order_delivery.phone_number = '０９０１２３４５６７８'
+        @order_delivery.valid?
+        expect(@order_delivery.errors.full_messages).to include('Phone number is not a number')
+      end
+      it 'phone_numberが英数混合では購入できない' do
+        @order_delivery.phone_number = '123456789ab'
         @order_delivery.valid?
         expect(@order_delivery.errors.full_messages).to include('Phone number is not a number')
       end
