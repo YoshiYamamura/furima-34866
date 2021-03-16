@@ -10,7 +10,7 @@ RSpec.describe OrderDelivery, type: :model do
 
   describe '商品購入機能' do
     context '正常系' do
-      it 'token, zip_code, prefecture_id, city, house_number, building_name, phone_numberが存在すれば登録できる' do
+      it 'token, zip_code, prefecture_id, city, house_number, building_name, phone_numberが存在すれば購入できる' do
         expect(@order_delivery).to be_valid
       end
       it 'building_nameは空でも購入できる' do
