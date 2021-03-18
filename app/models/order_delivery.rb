@@ -7,7 +7,7 @@ class OrderDelivery
     validates :user_id
     validates :item_id
     validates :zip_code, format: { with: /\A[0-9]{3}-[0-9]{4}\z/ }
-    validates :prefecture_id, numericality: { other_than: 1 }
+    validates :prefecture_id, numericality: { other_than: 1 , message: "を選択してください" }
     validates :city
     validates :house_number
     validates :phone_number, numericality: { only_integer: true }, length: { maximum: 11 }
