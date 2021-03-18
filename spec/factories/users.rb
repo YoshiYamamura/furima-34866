@@ -7,7 +7,7 @@ FactoryBot.define do
     first_name_kana       { 'タロウ' }
     birth                 { Faker::Date.between(from: 80.years.ago, to: Date.today) }
     email                 { Faker::Internet.email }
-    password              { Faker::Internet.password(min_length: 6) + 'a1' } #稀に英字、数字のみとなってエラーが出る
+    password              { Faker::Internet.password(min_length: 6) + 'a1' } # 稀に英字、数字のみとなってエラーが出る
     password_confirmation { password }
   end
 end
