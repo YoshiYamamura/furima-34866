@@ -11,8 +11,16 @@
   </div>
   <div class='nav'>
     <ul class='lists-left'>
-      <li><%= link_to 'カテゴリー', "#", class: "category-list" %></li>
-      <li><%= link_to 'ブランド', "#", class: "brand-list" %></li>
+      <li class='category-list'>
+        <span id='category-title'>カテゴリー</span>
+        <div id='category-area' class='category-elements hidden'>
+            <% Category.data.each do |cat| %>
+              <% if cat[:id] != 1 %>
+                <%= link_to "#{cat[:name]}", "/items/category?category_id=#{cat[:id]}", class: 'category-element' %>
+              <% end %>
+            <% end %>
+        </div>
+      </li>
     </ul>
     <ul class='lists-right'>
       <% if user_signed_in? %>

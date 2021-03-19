@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: [:index, :show, :category]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :can_not_change, only: [:edit, :update, :destroy]
 
@@ -37,6 +37,12 @@ class ItemsController < ApplicationController
   def destroy
     @item.destroy
     redirect_to root_path
+  end
+
+  def category
+    i = params[:category_id].to_i
+    @category = Category.data[i-1]
+    @items = Item.order(created_at: 'DESC').where(category_id: i)
   end
 
   private
