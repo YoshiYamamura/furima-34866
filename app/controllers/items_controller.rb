@@ -40,6 +40,9 @@ class ItemsController < ApplicationController
   end
 
   def category
+    i = params[:category_id].to_i
+    @category = Category.data[i-1]
+    @items = Item.order(created_at: 'DESC').where(category_id: i)
   end
 
   private
