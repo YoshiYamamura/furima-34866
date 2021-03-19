@@ -56,19 +56,30 @@
 
 .lists-left {
   display: flex;
-  min-width: 200px;
-
 }
 
 .category-list {
-  text-decoration: none;
   margin-right: 3vw;
   color: #333333;
 }
 
-.brand-list {
-  text-decoration: none;
+.category-elements {
+  position: absolute;
+  z-index: 100;
+  width: 250px;
+  font-size: 16px;
+}
+
+.category-element {
+  display: block;
+  background:rgba(245,245,245,0.9);
+  padding: 5px 10px;
   color: #333333;
+}
+.category-element:hover {
+  background:rgba(40, 210, 210, 1);
+  color: #ffffff;
+  font-weight: bold;
 }
 
 .lists-right {
@@ -101,4 +112,8 @@
 .sign-up {
   text-decoration: none;
   color: #333333;
+}
+
+.hidden {
+  display: none;
 }
