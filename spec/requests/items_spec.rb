@@ -20,7 +20,7 @@ describe ItemsController, type: :request do
     end
     it 'indexアクションにリクエストするとレスポンスに出品された商品の配送料の負担が存在する' do
       get root_path
-      expect(response.body).to include(FeeAllocation.data[@item.fee_allocation_id - 1][:name])
+      expect(response.body).to include(@item.fee_allocation.name)
     end
     it 'indexアクションにリクエストするとレスポンスに出品された商品の画像URLが存在する' do
       get root_path
@@ -51,23 +51,23 @@ describe ItemsController, type: :request do
     end
     it 'showアクションにリクエストするとレスポンスに出品された商品のカテゴリーが存在する' do
       get item_path(@item)
-      expect(response.body).to include(Category.data[@item.category_id - 1][:name])
+      expect(response.body).to include(@item.category.name)
     end
     it 'showアクションにリクエストするとレスポンスに出品された商品の商品の状態が存在する' do
       get item_path(@item)
-      expect(response.body).to include(Condition.data[@item.condition_id - 1][:name])
+      expect(response.body).to include(@item.condition.name)
     end
     it 'showアクションにリクエストするとレスポンスに出品された商品の配送料の負担が存在する' do
       get item_path(@item)
-      expect(response.body).to include(FeeAllocation.data[@item.fee_allocation_id - 1][:name])
+      expect(response.body).to include(@item.fee_allocation.name)
     end
     it 'showアクションにリクエストするとレスポンスに出品された商品の発送元の地域が存在する' do
       get item_path(@item)
-      expect(response.body).to include(Prefecture.data[@item.prefecture_id - 1][:name])
+      expect(response.body).to include(@item.prefecture.name)
     end
     it 'showアクションにリクエストするとレスポンスに出品された商品の発送日の目安が存在する' do
       get item_path(@item)
-      expect(response.body).to include(DeliveryPeriod.data[@item.delivery_period_id - 1][:name])
+      expect(response.body).to include(@item.delivery_period.name)
     end
     it 'showアクションにリクエストするとレスポンスに出品された商品の画像URLが存在する' do
       get item_path(@item)
@@ -82,7 +82,7 @@ describe ItemsController, type: :request do
     end
     it 'categoryアクションにリクエストするとレスポンスに出品された商品のカテゴリーが存在する' do
       get category_items_path(category_id: @item.category_id)
-      expect(response.body).to include(Category.data[@item.category_id - 1][:name])
+      expect(response.body).to include(@item.category.name)
     end
     it 'categoryアクションにリクエストするとレスポンスに出品された商品の商品名が存在する' do
       get category_items_path(category_id: @item.category_id)
@@ -94,7 +94,7 @@ describe ItemsController, type: :request do
     end
     it 'categoryアクションにリクエストするとレスポンスに出品された商品の配送料の負担が存在する' do
       get category_items_path(category_id: @item.category_id)
-      expect(response.body).to include(FeeAllocation.data[@item.fee_allocation_id - 1][:name])
+      expect(response.body).to include(@item.fee_allocation.name)
     end
     it 'categoryアクションにリクエストするとレスポンスに出品された商品の画像URLが存在する' do
       get category_items_path(category_id: @item.category_id)
