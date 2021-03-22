@@ -190,3 +190,45 @@ RSpec.describe '商品編集機能', type: :system do
     end
   end
 end
+
+RSpec.describe '商品削除機能', type: :system do
+  before do
+    @item = FactoryBot.create(:item)
+  end
+  context '正常系' do
+    it 'ログインしている出品者は、商品の削除が出来る' do
+      # ログインする
+      sign_in(@item.user)
+      # 商品詳細ページへ移動する
+      visit item_path(@item)
+      # 削除ボタンがあることを確認する
+      expect(page).to have_content('削除')
+      # 削除ボタンを押す
+      click_on('削除')
+      # トップページへ遷移したことを確認する
+      expect(current_path).to eq(root_path)
+      # トップページに出品していた商品の商品名、販売価格がないことを確認する
+      expect(page).to have_no_content(@item.name)
+      expect(page).to have_no_content(@item.price)
+    end
+  end
+  context '異常系' do
+    it 'ログインしている出品者以外のユーザーは、商品の削除が出来ない' do
+      # ログインする
+      another_user = FactoryBot.create(:user)
+      sign_in(another_user)
+      # 商品詳細ページへ移動する
+      visit item_path(@item)
+      # 削除ボタンがないことを確認する
+      expect(page).to have_no_content('削除')
+    end
+    it 'ログインしていないユーザーは、商品の削除が出来ない' do
+      # トップページに移動する
+      visit root_path
+      # 商品詳細ページへ移動する
+      visit item_path(@item)
+      # 削除ボタンがないことを確認する
+      expect(page).to have_no_content('削除')
+    end
+  end
+end
