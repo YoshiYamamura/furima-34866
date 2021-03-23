@@ -232,3 +232,32 @@ RSpec.describe '商品削除機能', type: :system do
     end
   end
 end
+
+RSpec.describe 'カテゴリー別表示機能', type: :system do
+  before do
+    @item = FactoryBot.create(:item)
+  end
+  context '正常系' do
+    it '出品されている商品のカテゴリー別ページが表示される' do
+      # トップページへ移動する
+      visit root_path
+      # ヘッダーのカテゴリーにhoverするとプルダウンメニューが表示されることを確認する
+      find('#category-title').hover
+      expect(page).to have_content("#{@item.category.name}")
+      # 商品詳細ページへ移動する
+      visit item_path(@item)
+      # カテゴリーをもっと見るリンクがあることを確認する
+      expect(page).to have_content("#{@item.category.name}をもっと見る")
+      # カテゴリーをもっと見るリンクをクリックする
+      click_on("#{@item.category.name}をもっと見る")
+      # カテゴリー別ページへ遷移したことを確認する
+      expect(current_path).to eq("/items/category")
+      # カテゴリー名、出品されている商品の商品名、販売価格、配送料の負担、画像が一覧表示されていることを確認する
+      expect(page).to have_content(@item.category.name)
+      expect(page).to have_content(@item.name)
+      expect(page).to have_content(@item.price.to_s)
+      expect(page).to have_content(@item.fee_allocation.name)
+      expect(page).to have_selector('.item-img')
+    end
+  end
+end
